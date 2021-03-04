@@ -6,6 +6,8 @@ pipeline {
             steps {
                 script {
                     echo "========executing Checkout========"
+                    sh 'pwd'
+                    sh 'ls'
                     sh 'printenv'
                     sh "git checkout ${BRANCH_NAME}"
                     git "https://github.com/bhanukai/nodejs-docker-helloworld"
