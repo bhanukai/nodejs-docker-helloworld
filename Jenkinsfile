@@ -6,6 +6,8 @@ pipeline {
             steps {
                 script {
                     echo "========executing Checkout========"
+                    sh 'printenv'
+                    sh "git checkout ${BRANCH_NAME}"
                     git "https://github.com/bhanukai/nodejs-docker-helloworld"
                     env.BRANCH_NAME = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
                     if (env.BRANCH_NAME == 'develop') {
