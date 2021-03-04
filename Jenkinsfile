@@ -9,6 +9,8 @@ pipeline {
                     sh 'pwd'
                     sh 'ls'
                     sh 'printenv'
+                    sh 'git status'
+                    sh 'git branch -v'
                     env.BRANCH_NAME = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
                     if (env.BRANCH_NAME == 'develop') {
                         env.COMMIT_ID = sh(returnStdout: true, script: 'git log -1 --format=%h').trim()
