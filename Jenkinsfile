@@ -5,7 +5,8 @@ pipeline {
         stage("Checkout") {
             steps {
                 script {
-
+                    env.LATEST_TAG = sh(returnStdout: true, script: 'git describe --tag').trim()
+                    git checkout ${LATEST_TAG}
                 }
             }
         }
