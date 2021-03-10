@@ -5,6 +5,7 @@ pipeline {
         stage("Checkout") {
             steps {
                 script {
+                    git rev-parse --abbrev-ref HEAD
                     env.LATEST_TAG = sh(returnStdout: true, script: 'git describe --tag').trim()
                     git checkout ${LATEST_TAG}
                 }
@@ -33,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://250288179072.dkr.ecr.ap-south-1.amazonaws.com', 'ecr:ap-south-1:jenkins-role') {
-                        docker.image('demo').push("${COMMIT_ID}")
+                        docker.image('demo').push("${LATEST_TAG}")
                     } 
                 }
             }
