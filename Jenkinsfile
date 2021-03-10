@@ -5,21 +5,7 @@ pipeline {
         stage("Checkout") {
             steps {
                 script {
-                    echo "========executing Checkout========"
-                    sh 'pwd'
-                    sh 'ls'
-                    sh 'printenv'
-                    sh 'git status'
-                    sh 'git branch -v'
-                    sh 'git checkout master'
-                    env.BRANCH_NAME = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
-                    if (env.BRANCH_NAME == 'develop') {
-                        env.COMMIT_ID = sh(returnStdout: true, script: 'git log -1 --format=%h').trim()
-                    } else if (env.BRANCH_NAME == 'master') {
-                        env.COMMIT_ID = sh(returnStdout: true, script: 'jq -r .version package.json').trim()
-                    }
-                    sh "echo ${COMMIT_ID}"
-                    sh "aws sts get-caller-identity"
+
                 }
             }
         }
