@@ -5,9 +5,9 @@ pipeline {
         stage("Checkout") {
             steps {
                 script {
-                    git rev-parse --abbrev-ref HEAD
+                    sh "git rev-parse --abbrev-ref HEAD"
                     env.LATEST_TAG = sh(returnStdout: true, script: 'git describe --tag').trim()
-                    git checkout ${LATEST_TAG}
+                    sh "git checkout ${LATEST_TAG}"
                 }
             }
         }
